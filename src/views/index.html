@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Store Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #e0b0ff, #f7a8b8); /* Purple to Pink gradient */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.8); /* White with opacity */
+            padding: 1rem 1.5rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        header .logo span {
+            color: #ec4899;
+        }
+        header nav {
+            display: none; /* Hidden on small screens */
+        }
+        @media (min-width: 768px) {
+            header nav {
+                display: block; /* Show on medium and large screens */
+            }
+        }
+        header nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem;
+        }
+        header nav ul li a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        header nav ul li a:hover {
+            color: #805ad5;
+        }
+        header button {
+            background-color: #ec4899;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1.5rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        header button:hover {
+            background-color: #c53083;
+        }
+        section.hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        section.hero .max-w-3xl {
+            max-width: 100%;
+        }
+        section.hero h1 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        section.hero p {
+            font-size: 1.125rem;
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+        section.hero button {
+            background: linear-gradient(to right, #ec4899, #805ad5);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            transform: scale(1);
+        }
+        section.hero button:hover {
+            background: linear-gradient(to right, #c53083, #6b46c1);
+            transform: scale(1.05);
+        }
+        section.services {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 4rem 1.5rem;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        section.services .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        section.services h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 3rem;
+        }
+        section.services .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            section.services .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            section.services .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        section.services .grid .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        section.services .grid .card:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-0.25rem);
+        }
+        section.services .grid .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #805ad5;
+            margin-bottom: 1rem;
+        }
+        section.services .grid .card p {
+            color: #718096;
+        }
+        section.products {
+            padding: 4rem 1.5rem;
+        }
+        section.products .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        section.products h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 3rem;
+        }
+        section.products .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            section.products .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            section.products .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        section.products .grid .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        section.products .grid .card:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-0.25rem);
+        }
+        section.products .grid .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #805ad5;
+            margin-bottom: 1rem;
+        }
+        section.products .grid .card p {
+            color: #718096;
+            margin-bottom: 1rem;
+        }
+        section.products .grid .card button {
+            background-color: #ec4899;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1.5rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        section.products .grid .card button:hover {
+            background-color: #c53083;
+        }
+        section.testimonials {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 4rem 1.5rem;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        section.testimonials .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        section.testimonials h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 3rem;
+        }
+        section.testimonials .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            section.testimonials .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        section.testimonials .grid .card {
+            background-color: #f7fafc;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        section.testimonials .grid .card p {
+            font-style: italic;
+            color: #718096;
+            margin-bottom: 1rem;
+        }
+        section.testimonials .grid .card p::before {
+            content: "“";
+        }
+        section.testimonials .grid .card p::after {
+            content: "”";
+        }
+        section.testimonials .grid .card span {
+            font-weight: 600;
+            color: #805ad5;
+        }
+        section.contact {
+            padding: 4rem 1.5rem;
+        }
+        section.contact .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        section.contact h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 3rem;
+        }
+        section.contact p {
+            font-size: 1.125rem;
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+        section.contact form {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        section.contact form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        section.contact form label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        section.contact form input,
+        section.contact form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            font-size: 1rem;
+            color: #4a5568;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        section.contact form input:focus,
+        section.contact form textarea:focus {
+            border-color: #805ad5;
+            box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.15);
+        }
+        section.contact form textarea {
+            border-radius: 0.5rem;
+            height: 8rem;
+            resize: vertical;
+        }
+        section.contact form button {
+            background: linear-gradient(to right, #805ad5, #ec4899);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            transform: scale(1);
+        }
+        section.contact form button:hover {
+            background: linear-gradient(to right, #6b46c1, #c53083);
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #4a5568;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            text-align: center;
+        }
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-button {
+            display: block;
+            position: relative;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 20;
+            margin-left: auto; /* Push to the right */
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-button {
+                display: none; /* Hide on larger screens */
+            }
+        }
+
+        .mobile-menu-button .bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #4a5568;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-button.open .bar {
+            background-color: transparent;
+        }
+
+        .mobile-menu-button .bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #4a5568;
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-button.open .bar::before {
+            transform: rotate(45deg);
+        }
+
+
+        .mobile-menu-button .bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #4a5568;
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu-button.open .bar::after {
+            transform: rotate(-45deg);
+        }
+
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 15;
+            padding-top: 4rem;
+            padding-left: 2rem;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu ul li a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: #805ad5;
+        }
+        .fade-in {
+          animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-400 to-pink-300 min-h-screen flex flex-col">
+    <header class="bg-white bg-opacity-80 py-4 px-6 rounded-b-lg shadow-md sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="logo text-xl font-bold text-gray-800">
+                <span class="text-pink-500">Paws</span> & Claws
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#services" class="text-gray-700 hover:text-purple-600 transition duration-300">Services</a></li>
+                    <li><a href="#products" class="text-gray-700 hover:text-purple-600 transition duration-300">Products</a></li>
+                    <li><a href="#testimonials" class="text-gray-700 hover:text-purple-600 transition duration-300">Testimonials</a></li>
+                    <li><a href="#contact" class="text-gray-700 hover:text-purple-600 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 px-5 rounded-full transition duration-300">
+                Shop Now
+            </button>
+             <div class="mobile-menu-button">
+                <span class="bar"></span>
+            </div>
+            <div class="mobile-menu">
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero container mx-auto text-center py-16 px-6 flex-grow flex items-center justify-center">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Your One-Stop Shop for Happy Pets</h1>
+            <p class="text-lg text-gray-700 mb-8">We offer a wide range of services and products to keep your furry friends healthy and happy.</p>
+            <button class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold py-3.5 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                Explore Our Services
+            </button>
+        </div>
+    </section>
+
+    <section id="services" class="services bg-white bg-opacity-90 py-16 px-6 rounded-t-lg shadow-md">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-12">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Pet Grooming</h3>
+                    <p class="text-gray-700">We offer professional grooming services to keep your pets looking their best.</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Veterinary Care</h3>
+                    <p class="text-gray-700">Our experienced veterinarians provide top-notch medical care for your pets.</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Pet Boarding</h3>
+                    <p class="text-gray-700">We offer comfortable and safe boarding facilities for your pets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products py-16 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-12">Featured Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Premium Pet Food</h3>
+                    <p class="text-gray-700 mb-4">High-quality pet food for optimal health.</p>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 px-5 rounded-full transition duration-300">
+                        View Details
+                    </button>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Durable Pet Toys</h3>
+                    <p class="text-gray-700 mb-4">Toys designed for hours of fun and exercise.</p>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 px-5 rounded-full transition duration-300">
+                        View Details
+                    </button>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4">Comfortable Pet Beds</h3>
+                    <p class="text-gray-700 mb-4">Cozy beds for a good night's sleep.</p>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 px-5 rounded-full transition duration-300">
+View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials bg-white bg-opacity-90 py-16 px-6 rounded-t-lg shadow-md">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-12">What Our Customers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="card bg-purple-100 rounded-lg p-6 shadow-md">
+                    <p class="text-gray-700 italic mb-4">"Paws & Claws provides excellent care for my pets. I highly recommend their services!"</p>
+                    <span class="text-purple-600 font-semibold">- Sarah M.</span>
+                </div>
+                <div class="card bg-purple-100 rounded-lg p-6 shadow-md">
+                    <p class="text-gray-700 italic mb-4">"The staff is friendly and knowledgeable. My pets always feel comfortable there."</p>
+                    <span class="text-purple-600 font-semibold">- John D.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact py-16 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-12">Contact Us</h2>
+            <p class="text-lg text-gray-700 mb-6">Email: info@pawsandclaws.com | Phone: +123 456 7890</p>
+            <form class="space-y-4">
+                    <div class="form-group">
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                        <input type="text" id="name" class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                        <input type="email" id="email" class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                        <textarea id="message" class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-y" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2.5 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 w-full">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-4 px-6 rounded-t-lg">
+        <div class="container mx-auto text-center">
+            <p>© 2024 Paws & Claws. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenuButton.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            // Add fade-in class when opening the menu
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.add('fade-in');
+            } else {
+                mobileMenu.classList.remove('fade-in');
+            }
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuButton.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
